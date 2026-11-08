@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title th:text="${pageTitle} + ' · SGPD'">Colaborador · SGPD</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><header class="topbar"><a class="brand" th:href="@{/colaboradores}">SGPD <span>Gestão de Pessoas</span></a><form th:action="@{/logout}" method="post"><button class="button ghost" type="submit">Sair</button></form></header>
+<main class="container narrow"><a class="back" th:href="@{/colaboradores}">← Voltar à lista</a><p class="eyebrow">CADASTRO DE PESSOAS</p><h1 th:text="${pageTitle}">Novo colaborador</h1><p>Preencha os campos obrigatórios para salvar o registro.</p>
+<form class="card form-grid" th:object="${form}" th:action="${action}" method="post">
+<div><label for="name">Nome *</label><input id="name" th:field="*{name}" maxlength="120" required><small class="field-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small></div>
+<div><label for="email">E-mail *</label><input id="email" th:field="*{email}" type="email" maxlength="180" required><small class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small><small class="muted">Use um e-mail válido e exclusivo.</small></div>
+<div><label for="phone">Telefone</label><input id="phone" th:field="*{phone}" type="tel" maxlength="30"></div>
+<div><label for="jobTitle">Cargo *</label><input id="jobTitle" th:field="*{jobTitle}" maxlength="120" required><small class="field-error" th:if="${#fields.hasErrors('jobTitle')}" th:errors="*{jobTitle}"></small></div>
+<div><label for="hireDate">Data de admissão *</label><input id="hireDate" th:field="*{hireDate}" type="date" required><small class="field-error" th:if="${#fields.hasErrors('hireDate')}" th:errors="*{hireDate}"></small></div>
+<div><label for="active">Status</label><select id="active" th:field="*{active}"><option value="true">Ativo</option><option value="false">Inativo</option></select></div>
+<div class="form-actions"><button class="button primary" type="submit">Salvar</button><a class="button outline" th:href="@{/colaboradores}">Cancelar</a></div></form></main></body></html>
