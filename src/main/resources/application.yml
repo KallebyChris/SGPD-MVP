@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: sgpd
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/sgpd}
+    username: ${SPRING_DATASOURCE_USERNAME:sgpd}
+    password: ${SPRING_DATASOURCE_PASSWORD:sgpd-local}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+server:
+  error:
+    include-message: never
+    include-stacktrace: never
