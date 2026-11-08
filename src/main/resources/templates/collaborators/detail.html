@@ -1,0 +1,6 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Detalhes · SGPD</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><header class="topbar"><a class="brand" th:href="@{/colaboradores}">SGPD <span>Gestão de Pessoas</span></a><form th:action="@{/logout}" method="post"><button class="button ghost" type="submit">Sair</button></form></header>
+<main class="container narrow"><a class="back" th:href="@{/colaboradores}">← Voltar aos resultados</a><div class="notice success" role="status" th:if="${success}" th:text="${success}"></div><p class="eyebrow">FICHA DO COLABORADOR</p><div class="detail-heading"><div><h1 th:text="${collaborator.name}">Nome</h1><p th:text="${collaborator.jobTitle}">Cargo</p></div><span th:text="${collaborator.active ? 'Ativo' : 'Inativo'}"></span></div>
+<section class="card detail-grid"><div><b>E-mail</b><p th:text="${collaborator.email}"></p></div><div><b>Telefone</b><p th:text="${collaborator.phone ?: 'Não informado'}"></p></div><div><b>Data de admissão</b><p th:text="${#temporals.format(collaborator.hireDate, 'dd/MM/yyyy')}"></p></div></section><a class="button primary" th:href="@{/colaboradores/{id}/editar(id=${collaborator.id})}">Editar</a></main></body></html>
