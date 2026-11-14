@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Colaboradores · SGPD</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><header class="topbar"><a class="brand" th:href="@{/colaboradores}">SGPD <span>Gestão de Pessoas</span></a><form th:action="@{/logout}" method="post"><button class="button ghost" type="submit">Sair</button></form></header>
+<main class="container"><div class="page-heading"><div><p class="eyebrow">ÁREA DE RH</p><h1>Colaboradores</h1><p>Pesquise e mantenha os dados em um só lugar.</p></div><a class="button primary" th:href="@{/colaboradores/novo}">Novo colaborador</a></div>
+<div class="notice success" role="status" th:if="${success}" th:text="${success}"></div>
+<section class="card"><form class="search" th:action="@{/colaboradores}" method="get"><div class="grow"><label for="q">Pesquisar por nome ou e-mail</label><input id="q" name="q" th:value="${query}" placeholder="Ex.: Ana Lima"></div><button class="button secondary" type="submit">Pesquisar</button></form></section>
+<section class="card"><h2>Resultados</h2><p class="muted" th:if="${#lists.isEmpty(collaborators)}">Nenhum colaborador encontrado. Revise a busca ou cadastre um novo registro.</p>
+<div class="table-wrap" th:unless="${#lists.isEmpty(collaborators)}"><table><thead><tr><th>Nome</th><th>E-mail</th><th>Cargo</th><th>Status</th><th>Ação</th></tr></thead><tbody>
+<tr th:each="item : ${collaborators}"><td th:text="${item.name}"></td><td th:text="${item.email}"></td><td th:text="${item.jobTitle}"></td><td th:text="${item.active ? 'Ativo' : 'Inativo'}"></td><td><a th:href="@{/colaboradores/{id}(id=${item.id})}">Ver detalhes</a></td></tr>
+</tbody></table></div></section></main></body></html>

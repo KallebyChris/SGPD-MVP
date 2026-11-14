@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: sgpd
+      POSTGRES_USER: sgpd
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sgpd-local}
+    ports:
+      - "5432:5432"
+    volumes:
+      - sgpd-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sgpd -d sgpd"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+volumes:
+  sgpd-data:
