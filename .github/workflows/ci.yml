@@ -1,0 +1,32 @@
+name: SGPD CI
+
+on:
+  push:
+    branches: [main, "codex/**"]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+      - name: Configurar Java 21 e cache Maven
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Compilar e executar testes
+        run: mvn --batch-mode --no-transfer-progress clean verify
+      - name: Publicar relatório JaCoCo
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-cobertura-jacoco
+          path: target/site/jacoco/
+          if-no-files-found: ignore
